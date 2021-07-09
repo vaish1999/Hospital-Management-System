@@ -7,19 +7,24 @@ PROJECT_NAME = 3_Implementation
 TEST_PROJ_NAME = Test_$(PROJ_NAME)
 
 
-SRC = hospital.c\
-src/Add_rec.c\
-src/Dlt_rec.c\
-src/EDit_rec.c\
-src/ex_it.c\
-src/func_list.c\
-src/Search_rec.c\
-src/Title.c
+SRC = main.c\
+src\add.c\
+src\del.c\
+src\edit.c\
+src\search.c\
+src\read.c\
+src\view.c\
+src\write.c\
+
+#TEST_SRC = test/test.c \
+#unity/unity.c 
+#INC_H = inc
+#INC_T = unity
 
 INC = inc
 
 $(PROJECT_NAME):$(SRC)
-	gcc -I $(INC) $(SRC)  -o hospital.exe 
+	gcc -I $(INC) $(SRC)  -o main.exe 
 	
 	
 run : $(PROJECT_NAME)
