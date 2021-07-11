@@ -2,9 +2,9 @@ name: Cppcheck-Static Code Quality Analysis
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 jobs:
   cppcheck:
