@@ -1,40 +1,88 @@
-# comments
+# OS detection
+ifeq ($(OS), Windows_NT)
+	EXECUTABLE=a.exe
+else
+	EXECUTABLE=a.out
+endif
 
-#Target : dependency
-#<TAB>Command
 
-PROJECT_NAME = 3_Implementation
-TEST_PROJ_NAME = Test_$(PROJ_NAME)
+$(EXECUTABLE): prog.c
+	gcc prog.c
+# Name of the project
+PROJECT_NAME = course
 
+# Output directory
+BUILD = build
 
+# All source code files
 SRC = main.c\
-src\add.c\
-src\del.c\
-src\edit.c\
-src\search.c\
-src\read.c\
-src\view.c\
-src\write.c\
+src/operations.c
 
-#TEST_SRC = test/test.c \
-#unity/unity.c 
-#INC_H = inc
-#INC_T = unity
+# All test source files
+TEST_SRC = src/operations.c\
+test/test.c\
+unity/unity.c\
 
-INC = inc
+TEST_OUTPUT = $(BUILD)/Test_$(PROJECT_NAME).out
 
-$(PROJECT_NAME):$(SRC)
-	gcc -I $(INC) $(SRC)  -o main.exe 
-	
-	
-run : $(PROJECT_NAME)
-	$(PROJECT_NAME)
+# All include folders with header files
+INC	= -Iinc\
+-Iunity\
 
-#test:
-#	gcc -I $(INC_H) -I $(INC_T) $(TEST_SRC) $(SRC) -o $(call FixPath,$(PROJECT_NAME))
-#	./$(call FixPath,$(PROJECT_NAME))
+#Library Inlcudes
+#INCLUDE_LIBS = 
+INCLUDE_LIBS = -lcunit
 
-#to delete all the exe files	
-clean :
-	rm -rf *exe
-#del /q .exe didnt work
+# Project Output name
+PROJECT_OUTPUT = $(BUILD)/$(EXECUTABLE)
+
+# Document files
+DOCUMENTATION_OUTPUT = documentation/html
+
+# Default target built
+$(PROJECT_NAME):all
+
+# Run the target even if the matching name exists
+.PHONY: run clean test doc all
+
+all: $(SRC) $(BUILD)
+	gcc $(SRC) $(INC) -o $(PROJECT_OUTPUT)
+
+# Call `make run` to run the application
+run:$(PROJECT_NAME)
+	./$(PROJECT_OUTPUT)
+
+# Document the code using Doxygen
+doc:
+	make -C ./documentation
+
+# Build and run the unit tests
+# $(INCLUDE_LIBS) 
+test:$(BUILD)
+	gcc $(TEST_SRC) $(INC) -o $(TEST_OUTPUT) 
+	./$(TEST_OUTPUT)
+
+analyze: test memcheck staticcheck coverage sanitize_check
+
+staticcheck:
+	cppcheck --enable=all -iunity .
+
+memcheck:
+	valgrind ./$(TEST_OUTPUT)
+
+sanitize_check:
+	gcc -fsanitize=address -fno-omit-frame-pointer $(TEST_SRC) $(INC) -o $(TEST_OUTPUT) $(INCLUDE_LIBS)
+	./$(TEST_OUTPUT)
+
+coverage:$(TEST_SRC)
+	gcc -fprofile-arcs -ftest-coverage $(TEST_SRC) $(INC) -o $(TEST_OUTPUT) $(INCLUDE_LIBS)
+	./$(TEST_OUTPUT)
+	gcov -a calculator_operations.c
+
+# Remove all the built files, invoke by `make clean`
+clean:
+	rm -rf $(BUILD) $(DOCUMENTATION_OUTPUT) *.gcda *.gcno *.gcov
+
+# Create new build folder if not present
+$(BUILD):
+	mkdir build
