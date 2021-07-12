@@ -19,7 +19,7 @@ int main()
 {
     read();
     int c,i,q;
-    printf("\t\t\t\t\t\tSimple Hospital Management System\n");
+    printf("\t\t\t\t\t\tPK Hospital Management System\n");
     printf("\t\t\t\t\t\t*********************************\n");
     printf("\n\n\n\n");
 
