@@ -4,7 +4,6 @@
 [![C CI - Build Status on Linux](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/c-build.yml/badge.svg)](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/c-build.yml)
 [![C CI - Build Status on Windows.](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/c-buildWin.yml/badge.svg)](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/c-buildWin.yml)
 [![Cppcheck-Static Code Quality Analysis](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Cppcheck.yml/badge.svg)](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Cppcheck.yml)
-[![Cppcheck-Static Code Quality Analysis](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Cppcheck.yml/badge.svg)](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Cppcheck.yml)
 [![Unit Testing - Unity](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Testunity.yml/badge.svg)](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Testunity.yml)
 [![Valgrind-Dynamic Code Quality Analysis](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/codeQualityDynamic.yml/badge.svg)](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/codeQualityDynamic.yml)
 
