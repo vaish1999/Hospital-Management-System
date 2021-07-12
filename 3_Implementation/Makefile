@@ -33,6 +33,33 @@ $(PROJECT_NAME):$(SRC)
 run :
 	./$(EXECUTABLE)
 
+
+doc:
+	make -C ./documentation
+
+# Build and run the unit tests
+# $(INCLUDE_LIBS) 
+test:$(BUILD)
+	gcc $(TEST_SRC) $(INC) -o $(TEST_OUTPUT) 
+	./$(TEST_OUTPUT)
+
+analyze: test memcheck staticcheck coverage sanitize_check
+
+staticcheck:
+	cppcheck --enable=all -iunity .
+
+memcheck:
+	valgrind ./$(TEST_OUTPUT)
+
+sanitize_check:
+	gcc -fsanitize=address -fno-omit-frame-pointer $(TEST_SRC) $(INC) -o $(TEST_OUTPUT) $(INCLUDE_LIBS)
+	./$(TEST_OUTPUT)
+
+coverage:$(TEST_SRC)
+	gcc -fprofile-arcs -ftest-coverage $(TEST_SRC) $(INC) -o $(TEST_OUTPUT) $(INCLUDE_LIBS)
+	./$(TEST_OUTPUT)
+	gcov -a calculator_operations.c
+
 #test:
 #	gcc -I $(INC_H) -I $(INC_T) $(TEST_SRC) $(SRC) -o $(call FixPath,$(PROJECT_NAME))
 #	./$(call FixPath,$(PROJECT_NAME))
