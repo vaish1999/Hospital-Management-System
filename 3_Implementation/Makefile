@@ -1,7 +1,4 @@
-# comments
-
-#Target : dependency
-#<TAB>Command
+# OS detection
 ifeq ($(OS), Windows_NT)
 	EXECUTABLE=a.exe
 else
@@ -10,30 +7,51 @@ endif
 
 
 
+# Name of the project
+PROJECT_NAME = course
 
-PROJECT_NAME = 3_Implementation
-TEST_PROJ_NAME = Test_$(PROJ_NAME)
+# Output directory
+BUILD = build
 
+# All source code files
+SRC = main.c\
+src/operations.c
 
-SRC = hospital.c\
-src/Add_rec.c\
-src/Dlt_rec.c\
-src/Edit_rec.c\
-src/ex_it.c\
-src/func_list.c\
-src/Search_rec.c\
-src/Title.c
+# All test source files
+TEST_SRC = src/operations.c\
+test/test.c\
+unity/unity.c\
 
-INC = inc
+TEST_OUTPUT = $(BUILD)/Test_$(PROJECT_NAME).out
 
-$(PROJECT_NAME):$(SRC)
-	gcc -I $(INC) $(SRC) -lncurses  -o $(EXECUTABLE) 
-	
-	
-run :
-	./$(EXECUTABLE)
+# All include folders with header files
+INC	= -Iinc\
+-Iunity\
 
+#Library Inlcudes
+#INCLUDE_LIBS = 
+INCLUDE_LIBS = -lcunit
 
+# Project Output name
+PROJECT_OUTPUT = $(BUILD)/$(EXECUTABLE)
+
+# Document files
+DOCUMENTATION_OUTPUT = documentation/html
+
+# Default target built
+$(PROJECT_NAME):all
+
+# Run the target even if the matching name exists
+.PHONY: run clean test doc all
+
+all: $(SRC) $(BUILD)
+	gcc $(SRC) $(INC) -o $(PROJECT_OUTPUT)
+
+# Call `make run` to run the application
+run:$(PROJECT_NAME)
+	./$(PROJECT_OUTPUT)
+
+# Document the code using Doxygen
 doc:
 	make -C ./documentation
 
@@ -60,11 +78,10 @@ coverage:$(TEST_SRC)
 	./$(TEST_OUTPUT)
 	gcov -a calculator_operations.c
 
-#test:
-#	gcc -I $(INC_H) -I $(INC_T) $(TEST_SRC) $(SRC) -o $(call FixPath,$(PROJECT_NAME))
-#	./$(call FixPath,$(PROJECT_NAME))
+# Remove all the built files, invoke by `make clean`
+clean:
+	rm -rf $(BUILD) $(DOCUMENTATION_OUTPUT) *.gcda *.gcno *.gcov
 
-#to delete all the exe files	
-clean :
-	rm -rf *exe
-#del /q .exe didnt work
+# Create new build folder if not present
+$(BUILD):
+	mkdir build
