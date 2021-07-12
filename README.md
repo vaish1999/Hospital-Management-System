@@ -6,4 +6,5 @@
 [![Cppcheck-Static Code Quality Analysis](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Cppcheck.yml/badge.svg)](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Cppcheck.yml)
 [![Cppcheck-Static Code Quality Analysis](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Cppcheck.yml/badge.svg)](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Cppcheck.yml)
 [![Unit Testing - Unity](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Testunity.yml/badge.svg)](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/Testunity.yml)
+[![Valgrind-Dynamic Code Quality Analysis](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/codeQualityDynamic.yml/badge.svg)](https://github.com/RakshitaRpatilkulkarni/Hospital-Management-System/actions/workflows/codeQualityDynamic.yml)
 
